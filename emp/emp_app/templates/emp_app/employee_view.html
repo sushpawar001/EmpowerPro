@@ -1,0 +1,65 @@
+{% extends "emp_app/backend.html" %}
+{% block content %}
+<style>
+    a {
+        color: #9381FF;
+    }
+
+    a:hover {
+        color: #B8B8FF;
+    }
+</style>
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+<div class="card p-3 mb-2 shadow-sm">
+    <div>
+        <form method="post" class="d-flex">
+            {% csrf_token %}
+            <input name="search" class="form-control mr-2">
+            <button type="submit" class="btn mr-2" style="background-color: #9381FF; color: #F8F7FF;">Search</button>
+            <button type="submit" class="btn" style="border-color: #9381FF; color: #9381FF;">Reset</button>
+        </form>
+    </div>
+</div>
+<div class="card p-3 table-responsive shadow">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a href="?sort=emplyoee_name">Name</a></th>
+                <th><a href="?sort=mobile_number">Mobile</a></th>
+                <th><a href="?sort=date_of_birth">Date of birth</a></th>
+                <th><a href="?sort=gender">Gender</a></th>
+                <th><a href="?sort=country">Country</a></th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in emp %}
+            <tr>
+                <td>{{ emp.emplyoee_name }}</td>
+                <td>{{ emp.mobile_number }}</td>
+                <td>{{ emp.date_of_birth|date:"Y-m-d" }}</td>
+                <td>{{ emp.gender }}</td>
+                <td>{{ emp.country }}</td>
+                <td class="d-flex">
+                    <a href="{% url 'employee-edit' %}{{ emp.id }}">
+                        <button class="btn btn-dark" type="submit">Edit</button>
+                    </a>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete" value="{{ emp.id }}">
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

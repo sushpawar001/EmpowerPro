@@ -1,0 +1,11 @@
+{% extends "emp_app/backend.html" %}
+{% block content %}
+<div class="card p-3 shadow">
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- {{ profile_form.gender }} -->
+    <button type="submit" class="btn" style="background-color: #9381FF; color: #F8F7FF;">Add User</button>
+</form>
+</div>
+{% endblock content %}

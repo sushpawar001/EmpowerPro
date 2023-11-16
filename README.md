@@ -13,7 +13,7 @@ EmpowerPro is a simple Django project designed to showcase CRUD (Create, Read, U
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/EmpowerPro.git
+git clone https://github.com/sushpawar001/EmpowerPro.git
 cd EmpowerPro
 ```
 
